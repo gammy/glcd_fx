@@ -37,8 +37,8 @@
 #define dline(a, b, c, d, e, f)	{GLCD.FillRect((a), (b), (c), (d), (e));\
 				 delay((f));}
 
-#define DISPLAY_CX	DISPLAY_WIDTH / 2
-#define DISPLAY_CY	DISPLAY_HEIGHT / 2
+#define DISPLAY_CX	(DISPLAY_WIDTH / 2)
+#define DISPLAY_CY	(DISPLAY_HEIGHT / 2)
 
 class GLCDFX {
 	
