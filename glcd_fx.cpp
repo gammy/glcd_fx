@@ -150,7 +150,7 @@ void GLCDFX::Button(int16_t x, int16_t y, char *text, uint8_t color) {
 	uint8_t inv_color = color == WHITE ? BLACK : WHITE;
 
 	if(x == -1) // Auto-center
-		x = DISPLAY_CX - (width >> 1):
+		x = DISPLAY_CX - (width >> 1);
 	if(y == -1) // Auto-center
 		y = DISPLAY_CY - (int) (height >> 1);
 	
