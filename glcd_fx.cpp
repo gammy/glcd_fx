@@ -141,13 +141,18 @@ void GLCDFX::Wipe(uint8_t effect, uint8_t ms, uint8_t color) {
 
 }
 
-void GLCDFX::Button(uint8_t x, uint8_t y, char *text, uint8_t color) {
+void GLCDFX::Button(int16_t x, int16_t y, char *text, uint8_t color) {
 
 	uint16_t width = (5 + 1) * strlen(text) + 3; // (font width + font spacing) * strlen + spacing
 	uint8_t height = 7 + 2 + 2; // Font height + 1 pixel spacing + 1 pixel border
 
 	uint8_t tmp_color = GLCD.FontColor;
 	uint8_t inv_color = color == WHITE ? BLACK : WHITE;
+
+	if(x == -1) // Auto-center
+		x = DISPLAY_CX - (width >> 1)
+	if(y == -1) // Auto-center
+		y = DISPLAY_CY - (int) (height >> 1)
 	
 	// FIXME Retareded clearing. This shouldn't be required :[
 	GLCD.FillRect(x, y, width - 1, height - 1, 
@@ -173,7 +178,7 @@ void GLCDFX::Button(uint8_t x, uint8_t y, char *text, uint8_t color) {
 
 }
 
-void GLCDFX::NButton(uint8_t x, uint8_t y, int value, uint8_t color) {
+void GLCDFX::NButton(int16_t x, int16_t y, int value, uint8_t color) {
 
 	char text[32]; // FIXME
 	memset(text, 0, 32);

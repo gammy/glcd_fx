@@ -19,7 +19,7 @@
 #include <ks0108_Panel.h>
 #include <ks0108_Arduino.h>
 #include <SystemFont5x7.h>
-//#include <Arial14.h>
+#include <Arial14.h>
 #include <ks0108_Mega.h>
 #include <ks0108.h>
 #include <stdlib.h>
@@ -45,8 +45,8 @@ class GLCDFX {
 	public:
 		GLCDFX(void);
 		void Wipe(uint8_t effect, uint8_t ms, uint8_t color);
-		void Button(uint8_t x, uint8_t y, char *text, uint8_t color);
-		void NButton(uint8_t x, uint8_t y, int value, uint8_t color);
+		void Button(int16_t x, int16_t y, char *text, uint8_t color);
+		void NButton(int16_t x, int16_t y, int value, uint8_t color);
 	
 	private:
 
