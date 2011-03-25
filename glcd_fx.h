@@ -16,12 +16,18 @@
    along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*
 #include <ks0108_Panel.h>
 #include <ks0108_Arduino.h>
 #include <SystemFont5x7.h>
 #include <Arial14.h>
 #include <ks0108_Mega.h>
 #include <ks0108.h>
+*/
+
+#include <glcd.h>
+#include "fonts/SystemFont5x7.h"
+
 #include <stdlib.h>
 #include <stdint.h>
 
@@ -30,9 +36,11 @@
 #ifndef GLCD_FX_H
 #define GLCD_FX_H
 
+/*
 #ifndef KS0108_H
 #warn Must link against ks0108
 #endif
+*/
 
 #define dline(a, b, c, d, e, f)	{GLCD.FillRect((a), (b), (c), (d), (e));\
 				 delay((f));}
@@ -44,6 +52,8 @@ class GLCDFX {
 	
 	public:
 		GLCDFX(void);
+
+		void ClearPage(uint8_t page, uint8_t color);
 		void Wipe(uint8_t effect, uint8_t ms, uint8_t color);
 		void Button(int16_t x, int16_t y, char *text, uint8_t color);
 		void NButton(int16_t x, int16_t y, int value, uint8_t color);

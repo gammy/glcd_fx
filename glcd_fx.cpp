@@ -22,6 +22,13 @@
 GLCDFX::GLCDFX(void) {
 }
 
+void GLCDFX::ClearPage(uint8_t page, uint8_t color){
+	for(uint8_t x=0; x < DISPLAY_WIDTH; x++){
+		GLCD.GotoXY(x, page * 8);
+		GLCD.WriteData(color);
+	}
+}
+
 void GLCDFX::Wipe(uint8_t effect, uint8_t ms, uint8_t color) {
 
 	int8_t x, y;
@@ -111,28 +118,28 @@ void GLCDFX::Wipe(uint8_t effect, uint8_t ms, uint8_t color) {
 
 	case 9: // Bank wipe, top to bottom
 		for(x = 0; x < 8; x++) {
-			GLCD.ClearPage(x, color);
+			ClearPage(x, color);
 			delay(ms);
 		}
 		break;
 
 	case 10: // Bank wipe, bottom to top
 		for(x = 0; x < 8; x++) {
-			GLCD.ClearPage(7 - x, color);
+			ClearPage(7 - x, color);
 			delay(ms);
 		}
 		break;
 
 	case 11: // Bank wipe, edges to center
 		for(x = 0; x < 4; x++) {
-			GLCD.ClearPage(x, color);
-			GLCD.ClearPage(7 - x, color);
+			ClearPage(x, color);
+			ClearPage(7 - x, color);
 			delay(ms);
 		}
 	case 12: // Bank wipe, center to edges
 		for(x = 3; x >= 0; x--) {
-			GLCD.ClearPage(x, color);
-			GLCD.ClearPage(7 - x, color);
+			ClearPage(x, color);
+			ClearPage(7 - x, color);
 			delay(ms);
 		}
 		break;
@@ -150,9 +157,9 @@ void GLCDFX::Button(int16_t x, int16_t y, char *text, uint8_t color) {
 	uint8_t inv_color = color == WHITE ? BLACK : WHITE;
 
 	if(x == -1) // Auto-center
-		x = DISPLAY_CX - (width >> 1);
+		x = DISPLAY_CX - (width / 2);
 	if(y == -1) // Auto-center
-		y = DISPLAY_CY - (int) (height >> 1);
+		y = DISPLAY_CY - (int) (height / 2);
 	
 	// FIXME Retareded clearing. This shouldn't be required :[
 	GLCD.FillRect(x, y, width - 1, height - 1, 
