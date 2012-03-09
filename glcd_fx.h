@@ -57,6 +57,7 @@ class GLCDFX {
 		void Wipe(uint8_t effect, uint8_t ms, uint8_t color);
 		void Button(int16_t x, int16_t y, char *text, uint8_t color);
 		void NButton(int16_t x, int16_t y, int value, uint8_t color);
+		void VBar(int16_t x, int16_t w, int8_t percent, uint8_t color, bool show_border);
 	
 	private:
 

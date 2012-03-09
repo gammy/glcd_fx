@@ -195,5 +195,54 @@ void GLCDFX::NButton(int16_t x, int16_t y, int value, uint8_t color) {
 	Button(x, y, text, color);
 }
 
+void GLCDFX::VBar(int16_t x, int16_t w, int8_t percent, uint8_t color, bool show_border) {
+
+	// Clipping
+	if(x < 0)
+		x = 0;
+
+	if(x >= DISPLAY_WIDTH)
+		x = DISPLAY_WIDTH - 1;
+
+	if(w <= 0) // Nothing to do!
+		return;
+
+	if(percent > 100)
+		percent = 100;
+
+	if(percent < 0)
+		percent = 0;
+	
+	// Invert
+	percent = 100 - percent;
+
+	// Render
+	int x1, x2, y1, y2;
+	
+	if(show_border) {
+		x1 = x;
+		x2 = x1 + w;
+		GLCD.DrawRect(x1, 0, w, DISPLAY_HEIGHT - 1, color);
+
+		w -= 2;
+		x++;
+		
+		y1 = percent * ((DISPLAY_HEIGHT - 2) / 100.0f);
+		y2 = DISPLAY_HEIGHT - 2;
+	} else {
+		y1 = percent * (DISPLAY_HEIGHT / 100.0f);
+		y2 = DISPLAY_HEIGHT - 1;
+	}
+
+	x1 = x;
+	x2 = x1 + w;
+
+	// Clear
+	GLCD.SetPixels(x1, show_border ? 1 : 0, x2, y1 - 2, color == BLACK ? WHITE : BLACK);
+	// Fill
+	GLCD.SetPixels(x1, y1, x2, y2, color);
+
+}
+
 // Instantiate
 GLCDFX GLCD_FX = GLCDFX();
